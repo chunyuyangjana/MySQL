@@ -12,7 +12,7 @@ select * from cats;
 INSERT INTO CATS (NAME, AGE)
 VALUES ('CHARLIE',10),('LYVIA',9),('VICKY',8);
 
-#Task
+#---------Task
 CREATE TABLE people (
     first_name VARCHAR(20),
     last_name VARCHAR(20),
@@ -24,7 +24,7 @@ insert into people(first_name,last_name, age) values('Bob','Belche',42);
 
 select * from people;
 
-#MULTIPAL INSERT
+#------------MULTIPAL INSERT
 INSERT INTO people (first_name,last_name, age)
 VALUES ('Linda','Belche',45),('Philip','Frond',38),('Calvin','Fischoeder','70');
 drop table people;
@@ -41,7 +41,7 @@ VALUES('This is some text blah blah blah blah blah text text text something abou
 
 INSERT INTO cats(name, age) VALUES('Lima', 'dsfasdfdas'); 
 
-#NULL NOT NULL
+#-----------NULL NOT NULL
 
 insert into cats(name) values('Alabama');
 select * from cats;
@@ -59,4 +59,58 @@ CREATE TABLE cats2
   INSERT INTO cats2(age) VALUES(7);
   SHOW WARNINGS;
   
-#Default value
+#---------------Default value
+
+ CREATE TABLE cats3
+  (
+    name VARCHAR(100) Default 'unnamed',
+    age INT default 99
+  );
+  
+   DESC cats3;
+   
+     CREATE TABLE cats4
+  (
+    name VARCHAR(100) not null Default 'unnamed',
+    age INT not null default 99
+  );
+  
+  #------------Primary key ->for unique identifier
+CREATE TABLE unique_cats (
+    cats_id INT NOT NULL,
+    name VARCHAR(100),
+    age INT,
+    PRIMARY KEY (cats_id)
+);
+desc unique_cats;
+insert into unique_cats() value(1,'Jana',25);
+insert into unique_cats() value(2,'Joe',24);
+select * from unique_cats;
+
+#Auto increment
+
+CREATE TABLE unique_cats2 (
+    cats_id INT NOT NULL auto_increment,
+    name VARCHAR(100),
+    age INT,
+    PRIMARY KEY (cats_id)
+);
+
+insert into unique_cats2(name, age) value('Jana',25);
+select * from unique_cats2;
+
+'---------------------exercise 
+CREATE TABLE employees2 (
+    id INT NOT NULL auto_increment,
+    last_name VARCHAR(100) not null,
+    first_name VARCHAR(100) not null,
+    middle_name VARCHAR(100) ,
+    age INT not null,
+    current_status varchar(100) not null default 'employed',
+    PRIMARY KEY (id)
+);
+
+INSERT INTO employees2(first_name, last_name, age) VALUES
+('Dora', 'Smith', 58);
+
+select * from employees2;
