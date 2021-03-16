@@ -1,0 +1,62 @@
+CREATE TABLE cats (
+    name VARCHAR(100),
+    age INT
+);
+
+insert into cats(name, age) values('Jeston',7);
+insert into cats(age, name) values(6,'Ashley');
+
+select * from cats;
+
+#MULTIPAL INSERT
+INSERT INTO CATS (NAME, AGE)
+VALUES ('CHARLIE',10),('LYVIA',9),('VICKY',8);
+
+#Task
+CREATE TABLE people (
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    age INT
+);
+
+insert into people(first_name,last_name, age) values('Tina','Belche',13);
+insert into people(first_name,last_name, age) values('Bob','Belche',42);
+
+select * from people;
+
+#MULTIPAL INSERT
+INSERT INTO people (first_name,last_name, age)
+VALUES ('Linda','Belche',45),('Philip','Frond',38),('Calvin','Fischoeder','70');
+drop table people;
+
+#show warnings
+show tables;
+
+set sql_mode='';
+desc cats;
+show warnings;
+
+INSERT INTO cats(name, age)
+VALUES('This is some text blah blah blah blah blah text text text something about cats lalalalal meowwwwwwwwwww', 10);
+
+INSERT INTO cats(name, age) VALUES('Lima', 'dsfasdfdas'); 
+
+#NULL NOT NULL
+
+insert into cats(name) values('Alabama');
+select * from cats;
+INSERT INTO cats() VALUES();
+
+CREATE TABLE cats2
+  (
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL
+  );
+  DESC cats2;
+  INSERT INTO cats2(name) VALUES('Texas');
+  SHOW WARNINGS;
+  SELECT * FROM cats2; 
+  INSERT INTO cats2(age) VALUES(7);
+  SHOW WARNINGS;
+  
+#Default value
