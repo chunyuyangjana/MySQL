@@ -1,0 +1,89 @@
+---#https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
+
+---#concat concat(x,y,z) -> 
+'concat(column1,column2,column3)
+'concat(column1,'text',column2,'text',column3)
+
+select CONCAT(author_fname,author_lname);
+select CONCAT('Hi',' ','morning') as concat;
+SELECT 
+    author_fname AS first,
+    author_lname AS last,
+    CONCAT(author_fname, ' ', author_lname) AS full_name
+FROM
+    books;
+
+---#concat_ws
+
+SELECT 
+    author_fname AS first,
+    author_lname AS last,
+    concat_ws('-',author_fname, author_lname) AS full_name
+FROM
+    books;
+    
+---#substring or substr
+
+select substring('Hello World',1,4);
+
+select substring('Hello World',1,4);
+select substring('Hello World',7); #start from the seventh char
+select substring('Hello World',3,8); #word 3-8
+SELECT SUBSTRING('Hello World',3); #word 3-last
+SELECT SUBSTRING('Hello World', -3); #last 3 char
+SELECT SUBSTRING('Hello World', -7);
+
+select title from books;
+SELECT substring(title,1,10) as short_title from books ;
+SELECT substr(title,1,10) as short_title from books ;
+
+---#concat+substr
+SELECT 
+    CONCAT(SUBSTRING(title, 1, 10), '...') AS short_title
+FROM
+    books;
+    
+--#replace
+
+SELECT REPLACE('Hello World', 'o', '0') as example;
+SELECT REPLACE('cheese bread coffee milk', ' ', ' and ') as example;
+
+select * from books;
+SELECT substr(REPLACE(title, 'e ', '3'),1,10) as 'example' FROM books;
+
+--#reverse
+SELECT REVERSE('Hello World'); 
+SELECT REVERSE('meow meow'); 
+SELECT REVERSE(author_fname) FROM books; 
+SELECT CONCAT('woof', REVERSE('woof')); 
+SELECT CONCAT(author_fname, REVERSE(author_fname)) FROM books;
+
+--#char_length
+SELECT CHAR_LENGTH('Hello World'); 
+SELECT author_lname, CHAR_LENGTH(author_lname) AS 'length' FROM books; 
+SELECT CONCAT_ws(' ',author_lname, 'is', CHAR_LENGTH(author_lname), 'characters long') FROM books;
+
+--#Upper & Lower case
+SELECT UPPER(title) FROM books;
+ 
+SELECT CONCAT('MY FAVORITE BOOK IS ', UPPER(title)) FROM books;
+ 
+SELECT CONCAT('MY FAVORITE BOOK IS ', LOWER(title)) FROM books;
+
+----#TEST
+
+select reverse(upper('Why does my cat loook at me with such hatred?')) as challenge1;
+select upper(reverse('Why does my cat loook at me with such hatred?')) as challenge1;
+select replace(concat_ws(' ','I','like','cat'),' ','-') as challenge2;
+select replace(title,' ','->') as challenge3 from books ;
+desc books;
+select author_lname as forwards, reverse(author_lname) as backwards from books;
+select upper(concat(author_fname,' ',author_lname)) as 'full name in caps' from books;
+select concat_ws(' ',title,'was released in',released_year) as 'blurb' from books;
+select title, char_length(title) as 'Character count' from books;
+SELECT 
+    CONCAT(SUBSTR(title, 1, 10), '...') AS 'short title',
+    CONCAT(author_lname, ',', author_fname) AS 'author',
+    CONCAT(stock_quantity, ' in stock') AS quantity
+FROM
+    books;
