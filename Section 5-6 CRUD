@@ -1,0 +1,32 @@
+---#CRUD Create Read Update Delete
+
+---#Select
+
+select cat_id, age from cats where cat_id = age  ;
+
+---#Aliases
+
+select cat_id as id, age from cats where cat_id = age  ;
+select cat_id as id, name as cat_name from cats   ;
+
+---#Update
+
+update cats set breed='shorthair' where breed = 'Tabby';
+update cats set age=14 where name = 'Misty';
+'Try selecting before update!!
+
+update cats set breed='British Shorthair' where name = 'Ringo';
+update cats set name='Jack' where name = 'Jackson';
+update cats set age=12 where breed = 'Maine Coon';
+
+---#Delete
+
+delete from cats where name='Egg';
+
+delete from cats; 'Delete everything from cats
+
+delete from cats where age=4;
+delete from cats where cat_id=age;
+delete from cats ;
+
+---
