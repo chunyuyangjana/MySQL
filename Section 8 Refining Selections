@@ -1,3 +1,9 @@
+
+---#distinct 'To show the unique vlaue
+---#order by
+---#limit
+---#like
+
 ---#distinct 'To show the unique vlaue
 
 SELECT distinct author_lname FROM books;
