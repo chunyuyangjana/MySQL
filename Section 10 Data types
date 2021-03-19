@@ -1,0 +1,143 @@
+-- CHAR & VARCHAR
+-- DECIMAL
+-- FLOAT & DOUBLE
+-- DATE, TIME & DATETIME
+-- CURDATE, CURTIME & NOW
+-- timestamp
+
+-- CHAR is for fixed length
+-- Decimal(5,2) -> 999.99
+-- decimal :fixed,precise, double are exact, float : float, double are approximate
+-- char & varchar
+use dog_walking_app;
+show tables;
+CREATE TABLE dogs (
+    name CHAR(5),
+    breed VARCHAR(10)
+);
+
+insert into dogs() values('Bob','beagle');
+insert into dogs() values('Robby','corgi');
+insert into dogs() values('Butte','retriever');
+select * from dogs;
+
+-- decimal
+create table items (price decimal(5,2));
+select * from items;
+insert into items(price) values (1.99),(999.99),(234.5);
+ 
+ -- float
+ create table items2 (price float);
+select * from items2;
+insert into items2(price) values (1123.22),(999.99),(234.5);
+
+-- DATE, TIME & DATETIME
+-- YYYY-MM-DD, HH:MM:SS, YYYY-MM-DD HH:MM:SS
+CREATE TABLE people (
+    name VARCHAR(100),
+    birthdate DATE,
+    birthtime TIME,
+    birthdt DATETIME
+);
+insert into people() values ('Jana','1995-10-19','10:10:10','1995-10-19 10:10:10');
+insert into people() values ('Jean','1996-11-20','20:10:10','1925-10-19 10:10:10');
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES('Padma', '1983-11-11', '10:07:35', '1983-11-11 10:07:35');
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES('Larry', '1943-12-25', '04:10:42', '1943-12-25 04:10:42');
+select * from people;
+
+-- CURDATE, CURTIME & NOW
+-- CURDATE() - gives current date
+-- CURTIME() - gives current time
+-- NOW() - gives current datetime
+
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES('Harry', curdate(), curtime(), now());
+
+-- ==Formating dates & time
+-- day()
+-- dayname()
+-- dayofweek()
+-- dayofyear()
+-- month()
+-- monthname()
+-- minute()
+
+select name, birthdate, day(birthdate) from people;
+select name, birthdate, dayname(birthdate) from people;
+select name, birthdate, dayofweek(birthdate) from people; #Fri = 6, Sat = 7, Sun = 1
+select name, birthdate, dayofyear(birthdate) from people;
+select name, birthdate, month(birthdate) from people;
+select name, birthdate, monthname(birthdate) from people;
+
+select name, concat_ws(' ',monthname(birthdate), day(birthdate), year(birthdate)) from people;
+select name, date_format(birthdate,'%M %D %Y') from people;
+select name, date_format(birthdate,'Birthday is %M %D %Y') from people;
+select name, date_format(birthdt,'%m/%d/%Y at %h:%m') from people;
+
+-- datediff()
+-- date_add()
+-- +/-
+-- https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html
+
+select * from people;
+select name, datediff(now(),birthdate) as 'born days'  from people;
+select name, birthdt , date_add(birthdt, interval 1 month)   from people;
+select name, birthdt , date_add(birthdt, interval 1 quarter)   from people;
+select name, birthdt , birthdt + interval 1 quarter from people;
+select name, birthdt , birthdt - interval 2 day from people;
+
+--#Timestamp
+
+create table comments( content varchar(100), create_at timestamp default now());
+insert into comments(content) values (':D');
+
+INSERT INTO comments (content) VALUES('lol what a funny article'); 
+INSERT INTO comments (content) VALUES('I found this offensive'); 
+INSERT INTO comments (content) VALUES('Ifasfsadfsadfsad');
+select * from comments order by create_at desc;
+
+create table comments2 (content varchar(100), changed_at timestamp default now() on update current_timestamp);
+INSERT INTO comments2 (content) VALUES('dasdasdasd'); 
+INSERT INTO comments2 (content) VALUES('lololololo'); 
+INSERT INTO comments2 (content) VALUES('I LIKE CATS AND DOGS');
+
+update comments2 set content='THIS IS NOT GIBBERISH' where content = 'dasdasdasd';
+SELECT * FROM comments2;
+ 
+SELECT * FROM comments2 ORDER BY changed_at;
+ 
+CREATE TABLE comments2 (
+    content VARCHAR(100),
+    changed_at TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
+);
+
+---Exercise---
+Create table EY(ID char(6), name varchar(100));
+create table inventory ( item_name varchar(100), price decimal(7,0), quantity int);
+
+ALTER TABLE inventory
+modify COLUMN price decimal (8,2);
+#1,000,000 (6+2,2)
+#difference between datetime & timestamp ->timestamp capture the current time
+#TIMESTAMP has a smaller range. TIMESTAMP also takes up less space. 
+#TIMESTAMP is used for things like meta-data about when something is created
+#or updated.
+
+select timestamp(now()); #select curtime()
+select curdate();
+select dayofweek(now());
+select date_format(now(), '%W' )  ;
+SELECT DATE_FORMAT(NOW(), '%w') + 1;
+select date_format(now(), '%m/%d/%Y') as today;
+select date_format(now(), '%M %D at %m:%s') as today;
+
+create table tweets_comments( content varchar(100), username varchar(100), create_time timestamp default now());
+
+INSERT INTO tweets_comments (content, username) VALUES('this is my first tweet', 'coltscat');
+SELECT * FROM tweets_comments;
+ 
+INSERT INTO tweets_comments (content, username) VALUES('this is my second tweet', 'coltscat');
+SELECT * FROM tweets_comments;
