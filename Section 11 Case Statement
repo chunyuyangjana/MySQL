@@ -1,0 +1,33 @@
+SELECT 
+    title,
+    released_year,
+    CASE
+        WHEN released_year >= 2000 THEN 'Modern Lit'
+        ELSE '20th Century Lit'
+    END AS genre #Title name
+FROM
+    books;
+    
+    SELECT 
+    title,
+    stock_quantity,
+    CASE
+        WHEN stock_quantity between 0 and 50 THEN '*'
+        WHEN stock_quantity between 51 and 100 THEN '**'
+        WHEN stock_quantity between 101 and 200 THEN '***'
+        ELSE '****'
+    END AS Stock #Title name
+FROM
+    books;
+    
+     SELECT 
+    title,
+    stock_quantity,
+    CASE
+        WHEN stock_quantity <= 50 THEN '*'
+        WHEN stock_quantity <= 100 THEN '**'
+        WHEN stock_quantity <= 200 THEN '***'
+        ELSE '****'
+    END AS Stock #Title name
+FROM
+    books;
