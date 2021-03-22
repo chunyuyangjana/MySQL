@@ -1,0 +1,101 @@
+-- not equal
+-- not like
+-- greater than
+-- less than
+-- and
+-- or
+-- Between
+-- in and not in
+-- case statements
+
+
+-- not equal
+use book_shop;
+select title, released_year from books where released_year =2017 ;
+select title, released_year from books where released_year !=2017 ;
+
+-- not like
+select * from books where title like 'W%' ;
+select * from books where title not like 'W%' ;
+
+-- greater than
+select * from books where released_year > 2000 ;
+select * from books where released_year >= 2000 ;
+
+select 99 > 1; -- 1 = true
+select 20 > 31;
+select 100 > 5;
+select -31 > 31;
+select 9 > -10;
+select 31 > 31;
+select 'a' > 'b';
+select 'A' > 'a';
+
+select * from books where released_year < 2000 ;
+select * from books where released_year <= 2000 ;
+
+-- less than
+select 99 < 1; -- 1 = true
+select 20 < 31;
+select 100 < 5;
+select -31 < 31;
+select 9 < -10;
+select 31 < 31;
+select 'a' < 'b';
+select 'A' < 'a';
+
+select * from books where title ='American gods' and author_fname = 'Neil' and author_lname = 'Gaiman';
+select * from books where author_fname = 'Neil' and author_lname = 'Gaiman' and released_year > 2000;
+
+select 1 < 5 && 7 = 9;
+select -40 < 5 && 10 = 40;
+select 54 > 5 && 'a' = 'A';
+
+SELECT 
+    *
+FROM
+    books
+WHERE
+    released_year > 2000
+        && title LIKE '%A%';
+        
+-- or ||
+
+SELECT 
+    *
+FROM
+    books
+WHERE
+    released_year > 2000
+        || title LIKE '%A%';
+        
+SELECT 
+    *
+FROM
+    books
+WHERE
+    released_year > 2000
+        or title LIKE '%A%';
+        
+select 1 < 5 || 7 = 9;
+select -40 < 5 || 10 = 40;
+select 54 > 5 || 'a' = 'A';
+select 54 < 5 || 'a' != 'A';
+
+-- between/not between
+select * from books where released_year >= 2004 && released_year <= 2008;
+select * from books where released_year between 2004 and 2008;
+
+select * from books where released_year < 2004 or released_year > 2008;
+select * from books where released_year not between 2004 and 2008;
+
+
+SELECT name, birthdt FROM people WHERE birthdt BETWEEN '1980-01-01' AND '2000-01-01';
+
+SELECT 
+    name, 
+    birthdt 
+FROM people
+WHERE 
+    birthdt BETWEEN CAST('1980-01-01' AS DATETIME)
+    AND CAST('2000-01-01' AS DATETIME);
