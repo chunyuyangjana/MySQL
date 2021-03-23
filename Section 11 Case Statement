@@ -31,3 +31,34 @@ FROM
     END AS Stock #Title name
 FROM
     books;
+    
+    select 10 != 10;
+    select 15 >44 && 99-5 <= 94;
+    select 1 in (5,3) || 9 between 8 and 10;
+    
+    select * from books where released_year < 1980;
+    select * from books where author_lname in ('egger','chabon');
+    select * from books where author_lname ='lahiri' && released_year >2000;
+    select * from books where pages between 100 and 200;
+    select * from books where author_lname like 'C%' or author_lname = 'S%';
+    select * from books where substr(author_lname,1,1) in ('C','S');
+    SELECT 
+    title,
+    author_lname,
+    CASE
+        WHEN title like '%stories%' THEN 'Short Stories'
+        WHEN title ='Just kids' or title = 'A Heartbreaking Work of Staggering Genius' THEN 'Memoir'
+        else 'Novel'
+    END AS type
+FROM
+    books;
+    
+SELECT 
+    title,
+    author_lname,
+    CASE
+        WHEN COUNT(author_lname) = 1 THEN ('1 book')
+         else  concat(count(author_lname),' books') 
+    END AS 'Count'
+FROM
+    books group by author_lname, author_fname;
