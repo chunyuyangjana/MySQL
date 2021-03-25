@@ -1,0 +1,45 @@
+//Print "HELLO WORLD" 500 times using Node
+
+for(var i = 0; i < 500; i++){
+  console.log("HELLO WORLD!");
+}
+// Execute file with:
+
+node filename.js
+
+---!!Faker
+
+STEP 1: Install and Require Faker
+// Install Faker via command line:
+
+npm install faker 
+
+// Require it inside of a JS file:
+
+var faker = require('faker'); 
+
+STEP 2: Use Faker!
+// Print a random email
+
+console.log(faker.internet.email()); 
+
+// Print a random past date
+
+console.log(faker.date.past()); 
+
+Please note: In newer versions of node you will get a different looking timestamp output when using console.log(faker.date.past());, compared to what Colt gets in the lecture. To mimic what he gets, you can use the following: console.log(faker.date.past().toString());
+
+// Print a random city
+
+console.log(faker.address.city()); 
+
+// We can define a new function
+
+function generateAddress(){
+  console.log(faker.address.streetAddress());
+  console.log(faker.address.city());
+  console.log(faker.address.state());
+}
+// And then execute that function:
+
+generateAddress(); 
