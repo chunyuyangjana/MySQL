@@ -43,3 +43,13 @@ function generateAddress(){
 // And then execute that function:
 
 generateAddress(); 
+
+--
+
+//inserting data take 3
+var person = {email: faker.internet.email(), created_at: faker.date.past() };
+connection.query('Insert into users set ?',person, function (error, results) {
+  if (error) throw error;
+  console.log(results);
+});
+connection.end()
