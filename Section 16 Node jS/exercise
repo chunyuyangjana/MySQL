@@ -1,0 +1,24 @@
+-- Find the oldest user date
+-- 1.
+select date_format(created_at,'%M %D %Y') from users  order by created_at asc limit 1;
+-- 2.
+select date_format(min(created_at),'%M %D %Y') from users  ;
+
+-- find the email of the first user
+select email, created_at from users where created_at = (select min(created_at) from users);
+
+-- User according to th month they join
+select date_format(created_at,'%M') as Month, count(*) from users group by month;
+
+-- Count the yahoo users
+ select count(email) as yahoo_users from users where email like '%@yahoo.com%';
+ 
+-- know the users
+select  case 
+  when email like '%@gmail%' then 'google'
+  when email like '%@yahoo%' then 'yahoo'
+  when email like '%@hotmail%' then 'hotmail'
+  else 'other' end as email_user, 
+  count(*) as total_users
+  from users group by email_user
+  order by total_users;
